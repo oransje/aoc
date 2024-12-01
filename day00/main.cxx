@@ -3,33 +3,35 @@
 #include <fstream>
 #include <vector>
 #include <utility>
+#include <unordered_map>
 
 #define FILEPATH "./day00/input.txt" 
 
 int sum_distance(std::vector<int> a, std::vector<int> b);
+void sort_pair(std::pair<std::vector<int>, std::vector<int> > *pv);
 std::pair<std::vector<int>, std::vector<int> > generate_pair_vectors();
 std::pair<int, int> get_two_values(std::string& s);
 int calculate_similarity(std::vector<int> a, std::vector<int> b);
 
-int main() {
+int main() 
+{
     std::pair<std::vector<int>, std::vector<int> > pv;
-    int distance;
+    int distance, similarity;
 
     pv = generate_pair_vectors();
+    sort_pair(&pv);
 
     distance = sum_distance(pv.first, pv.second);
-    std::cout << "sum of distances is: " <<  distance << std::endl;
-    std::cout << "similarity score is:" << 42 << std::endl;
+    similarity = calculate_similarity(pv.first, pv.second);
+    std::cout << "sum of distances: " <<  distance << std::endl;
+    std::cout << "similarity score: " << similarity << std::endl;
 
     return 0;
 }
 
-int sum_distance(std::vector<int> a, std::vector<int> b) {
+int sum_distance(std::vector<int> a, std::vector<int> b) 
+{
     int sum_distance = 0;
-
-    // by default std::sort uses '<' operator
-    std::sort(a.begin(), a.end());
-    std::sort(b.begin(), b.end());
 
     for(auto i = a.begin(), j = b.begin(); j != b.end(); ++i, ++j) {
         if (*i > *j) {
@@ -41,6 +43,12 @@ int sum_distance(std::vector<int> a, std::vector<int> b) {
     }   
 
     return sum_distance;
+}
+
+void sort_pair(std::pair<std::vector<int>, std::vector<int> > *pv) {
+     // by default std::sort uses "<" operator
+    std::sort(pv->first.begin(), pv->first.end());
+    std::sort(pv->second.begin(), pv->second.end());
 }
 
 std::pair<std::vector<int>, std::vector<int> > generate_pair_vectors() 
@@ -80,7 +88,18 @@ std::pair<int, int> get_two_values(std::string& s)
 
 int calculate_similarity(std::vector<int> a, std::vector<int> b)
 {
+    std::unordered_map<int, int> counter;
     int similarity = 0;
 
+    for (auto t:a)
+         counter[t]++;
+
+    for (auto k:b) {
+        bool found = counter.count(k) != 0;
+        if (found) {
+            similarity += k * counter[k];
+        } 
+    }
+    
     return similarity;
 }
