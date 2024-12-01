@@ -23,7 +23,7 @@ This command runs the problem specified for that day, with two algarisms and zer
 
 ### Clean all executables:
 ```
-# make clean
+$ make clean
 ```
 
 This task will just remove all binary files associated with the project.
