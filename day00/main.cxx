@@ -96,9 +96,8 @@ int calculate_similarity(std::vector<int> a, std::vector<int> b)
 
     for (auto k:b) {
         bool found = counter.count(k) != 0;
-        if (found) {
+        if (found)
             similarity += k * counter[k];
-        } 
     }
     
     return similarity;
