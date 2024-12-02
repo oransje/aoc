@@ -55,7 +55,6 @@ std::pair<std::vector<int>, std::vector<int> > generate_pair_vectors()
 {
     std::ifstream file;
     std::string line;
-    std::string full_file;
     std::vector<int> first_column;
     std::vector<int> second_column;
 
