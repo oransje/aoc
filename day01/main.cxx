@@ -5,7 +5,6 @@
 #include <algorithm>
 #include <fstream>
 #include <cmath>
-#include <functional>
 
 #define FILEPATH "./day01/input.txt"
 
