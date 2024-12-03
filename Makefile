@@ -6,6 +6,9 @@ day00: ./day00/main.cxx
 
 day01: ./day01/main.cxx
 	$(CXX) $(CXX_FLAGS) -o ./day01.out ./day01/main.cxx
+	
+day02: ./day02/main.cxx
+	$(CXX) $(CXX_FLAGS) -o ./day02.out ./day02/main.cxx
 
 clean:
 	rm -rf *.out
